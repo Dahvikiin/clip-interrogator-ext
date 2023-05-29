@@ -20,4 +20,4 @@ This extension adds a tab for [CLIP Interrogator](https://github.com/pharmapsych
 
 * Revert to CLIP Interrogator 0.6.0
 * No more "The size of tensor a (8) must match the blablabla..." error
-* Works with `transformers<=4.29.2`
+* Works with `transformers>=4.26.0,<=4.29.2`
