@@ -158,7 +158,7 @@ def about_tab():
     gr.Markdown("## Github")
     gr.Markdown(
         "I made [this fork](https://github.com/Dahvikiin/clip-interrogator-ext) just to solve a problem I had with my version of 'transformers' but then I added some buttons, maybe someone will find it useful. \n"
-        "this fork of [the original Extension](https://github.com/pharmapsychotic/clip-interrogator-ext) and [CLIP Interrogator on Github](https://github.com/pharmapsychotic/clip-interrogator) and drop a star if you like it!"
+        " [original Extension](https://github.com/pharmapsychotic/clip-interrogator-ext) and [CLIP Interrogator on Github](https://github.com/pharmapsychotic/clip-interrogator) drop a star if you like it!"
     )
     gr.Markdown("## Test Setup")
     gr.Markdown(
