@@ -10,8 +10,9 @@ import clip_interrogator
 from clip_interrogator import Config, Interrogator, list_caption_models, list_clip_models
 
 from modules import devices, lowvram, script_callbacks, shared
+import modules.generation_parameters_copypaste as parameters_copypaste
 
-__version__ = '0.1.3'
+__version__ = '0.1.5b'
 
 ci = None
 low_vram = False
@@ -155,7 +156,22 @@ def about_tab():
         "* When you are done click the **Unload** button to free up memory."
     )
     gr.Markdown("## Github")
-    gr.Markdown("If you have any issues please visit [CLIP Interrogator on Github](https://github.com/pharmapsychotic/clip-interrogator) and drop a star if you like it!")
+    gr.Markdown(
+        "I made [this fork](https://github.com/Dahvikiin/clip-interrogator-ext) just to solve a problem I had with my version of 'transformers' but then I added some buttons, maybe someone will find it useful. \n"
+        "this fork of [the original Extension](https://github.com/pharmapsychotic/clip-interrogator-ext) and [CLIP Interrogator on Github](https://github.com/pharmapsychotic/clip-interrogator) and drop a star if you like it!"
+    )
+    gr.Markdown("## Test Setup")
+    gr.Markdown(
+        "potentially useful information: \n"
+        "* python: 3.10.11 \n"
+        "* torch==2.0.1+cu118 \n"
+        "* gradio==3.32.0 \n"
+        "* transformers==4.29.2 \n"
+        "* AUTOMATIC1111 Web-ui v1.3.0 \n"
+        "* Windows 10 \n"
+        "* RTX 2060 6GB \n"
+        "* the cat's name was **-Lebobo-** 🐈 \n"
+    )
     gr.Markdown(f"<br><br>CLIP Interrogator version: {clip_interrogator.__version__}<br>Extension version: {__version__}")
 
     if torch.cuda.is_available():
@@ -264,9 +280,13 @@ def prompt_tab():
     with gr.Row():
         button = gr.Button("Generate", variant='primary')
         unload_button = gr.Button("Unload")
+    with gr.Row():
+        buttons = parameters_copypaste.create_buttons(["txt2img", "img2img", "inpaint", "extras"])
     button.click(image_to_prompt, inputs=[image, mode, clip_model, caption_model], outputs=prompt)
     unload_button.click(unload)
-
+    
+    for tabname, button in buttons.items():
+        parameters_copypaste.register_paste_params_button(parameters_copypaste.ParamBinding(paste_button=button, tabname=tabname, source_text_component=prompt, source_image_component=image,))
 
 def add_tab():
     global low_vram
